@@ -29,5 +29,5 @@ urlpatterns = [
     path('booking/<int:booking_id>/update/', views.UpdateBooking.as_view(), name="update-booking"),
     path('booking/<int:booking_id>/cancel/', views.CancelBooking.as_view(), name="cancel-booking"),
     path('login/', TokenObtainPairView.as_view(), name='login'),
-    path('<int:booking_id>/create/', views.CreateView.as_view(), name='book-flight')
+    path('<int:flight_id>/create/', views.CreateView.as_view(), name='book-flight')
 ]

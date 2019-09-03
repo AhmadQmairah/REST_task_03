@@ -42,5 +42,5 @@ class CreateView(CreateAPIView):
 		
 		
 		def perform_create(self, serializer):
-			booking_id = self.kwargs.get('booking_id')
+			booking_id = self.kwargs.get('flight_id')
 			serializer.save(user=self.request.user, flight=Flight.objects.get(id=booking_id))
