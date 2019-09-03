@@ -1,6 +1,6 @@
-from rest_framework.generics import ListAPIView, RetrieveAPIView, RetrieveUpdateAPIView, DestroyAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, RetrieveUpdateAPIView, DestroyAPIView,CreateAPIView
 from datetime import datetime
-
+from django.views.decorators.csrf import csrf_exempt
 from .models import Flight, Booking
 from .serializers import FlightSerializer, BookingSerializer, BookingDetailsSerializer, UpdateBookingSerializer
 
@@ -33,3 +33,14 @@ class CancelBooking(DestroyAPIView):
 	queryset = Booking.objects.all()
 	lookup_field = 'id'
 	lookup_url_kwarg = 'booking_id'
+
+
+class CreateView(CreateAPIView):
+		serializer_class = UpdateBookingSerializer
+
+
+		
+		
+		def perform_create(self, serializer):
+			booking_id = self.kwargs.get('booking_id')
+			serializer.save(user=self.request.user, flight=Flight.objects.get(id=booking_id))
